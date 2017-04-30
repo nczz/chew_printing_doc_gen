@@ -11714,7 +11714,7 @@
     <!--[if lt IE 9]>
             <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-    <script lang="javascript" src="dist/xlsx.core.min.js"></script>
+    <script lang="javascript" src="xlsx-style/dist/xlsx.core.min.js"></script>
     <script type="text/javascript">
     /* Blob.js
      * A Blob implementation.
@@ -12202,7 +12202,40 @@
                 var cell = {
                     v: data[R][C]
                 };
-                if (cell.v == null) continue;
+                cell.s = {
+                        alignment: {
+                            vertical: "center",
+                            horizontal: "center"
+                        },
+                        border: {
+                            top: {
+                                style: "medium",
+                                color: {
+                                    rgb: "00000000"
+                                }
+                            },
+                            bottom: {
+                                style: "medium",
+                                color: {
+                                    rgb: "00000000"
+                                }
+                            },
+                            left: {
+                                style: "medium",
+                                color: {
+                                    rgb: "00000000"
+                                }
+                            },
+                            right: {
+                                style: "medium",
+                                color: {
+                                    rgb: "00000000"
+                                }
+                            }
+                        }
+                    }
+                    //if (cell.v == null) continue;
+                if (cell.v == null) cell.v = " ";
                 var cell_ref = XLSX.utils.encode_cell({
                     c: C,
                     r: R
@@ -12215,6 +12248,8 @@
                     cell.z = XLSX.SSF._table[14];
                     cell.v = datenum(cell.v);
                 } else cell.t = 's';
+
+
 
                 ws[cell_ref] = cell;
             }
@@ -12268,7 +12303,7 @@
                 //拆分(前四頁封面另外處理)
                 var size = 16;
                 var cover = idata.slice(0, 4);
-                for (var i = 0; i < idata.length; i += size) {
+                for (var i = 4; i < idata.length; i += size) {
                     chewprint_page.push(idata.slice(i, i + size));
                 }
 
